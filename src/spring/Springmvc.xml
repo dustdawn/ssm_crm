@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+<!-- SpringMVC核心配置文件
+	SpringMVC本身是Spring的子项目，不需要很多配置
+	配置内容：
+		1. 组件扫描器：Controller扫描自动扫描标记@Controller的控制器类 让Spring对页面控制层Controller进行管理
+		2. 注解驱动：配置注解映射器和适配器，两者已废弃，用注解驱动代替
+		3. 视图解析器：视图解析器用SpringMVC默认的，支持JSP视图的解析  配置前后缀  最终JSP物理地址 前缀+逻辑视图名+后缀
+ -->        
+	<!-- 配置 读取properties文件 resource.properties -->
+	<context:property-placeholder location="classpath:resource.properties" />
+        
+	<!-- 1. 配置Controller扫描 -->
+	<context:component-scan base-package="com.dustdawn.crm.controller" />
+
+	<!-- 2. 配置注解驱动 -->
+	<mvc:annotation-driven />
+	
+	<!-- 对静态资源放行 -->
+	<mvc:resources location="/css/" mapping="/css/**" />
+	<mvc:resources location="/js/" mapping="/js/**" />
+	<mvc:resources location="/fonts/" mapping="/fonts/**" />
+	
+	<!-- 3.配置视图解析器 -->
+	<bean	class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- 前缀 -->
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<!-- 后缀 -->
+		<property name="suffix" value=".jsp" />
+	</bean>
+</beans>

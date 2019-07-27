@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!-- mybatis的配置文件
+	原本为配置数据库连接信息以及自定义sql文件的引用 
+	整合springmvc后，配置在application-dao.xml完成
+	这里只需要为为sql文件(mapper.xml)中引用的pojo类配置别名
+-->
+	
+	<!-- 为sql文件中引用的pojo类配置别名 -->
+	<typeAliases>
+		<package name="com.dustdawn.crm.pojo"/>
+	</typeAliases>
+	
+</configuration>

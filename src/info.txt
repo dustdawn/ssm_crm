@@ -1,0 +1,42 @@
+SpringMVC 与 Mybatis整合
+
+	Dao层：
+Mybatis部分
+	1. 配置SqlMapConfig.xml
+		Mybatis的全局配置文件，配置了mybatis的运行环境
+		配置数据库连接信息
+			加载properties文件，配置数据库账户信息
+			数据源，数据库连接池
+			SqlSessionFactory对象，需要Spring和mybatis整合包下的 SqlSessionFactory接口
+		以及自定义sql文件(mapper包下同mapper类接口同名的mapper.xml文件，动态代理实现接口类)的引用
+			配置Mapper扫描器:Mapper动态代理方式，通过mapper接口同名的xml文件动态代理生成接口的实现类，其中定义了sql语句
+			
+	2. 配置applicationContext-dao.xml
+		整合springmvc后SqlMapConfig的所有配置在applicationContext-dao上完成
+		
+SpringMVC部分
+	Service层
+		1. 配置applicationContext-service.xml
+			组件扫描器:Controller扫描,自动扫描标记@Service的Service类 让Spring对业务层Service进行管理
+		2. 配置applicationContext-trans.xml
+			配置事务管理：事务管理器、通知、切面
+			注解事务管理
+			
+	Controller层
+		1. 配置Springmvc.xml
+			SpringMVC核心配置文件
+			配置内容：
+				组件扫描器：Controller扫描自动扫描标记@Controller的控制器类 让Spring对页面控制层Controller进行管理
+				注解驱动：配置注解映射器和适配器，两者已废弃，用注解驱动代替
+				视图解析器：视图解析器用SpringMVC默认的，支持JSP视图的解析  配置前后缀  最终JSP物理地址 前缀+逻辑视图名+后缀
+				
+				
+web.xml配置
+	1. 配置Spring容器  applicationContext-*.xml
+  	2. 配置监听器加载Spring
+  	3. 配置中文乱码过滤器
+  	4. 配置SpringMVC，包括   前端控制器   和核心配置文件  Springmvc.xml的路径
+		
+		
+		
+		
